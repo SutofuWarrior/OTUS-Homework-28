@@ -106,18 +106,7 @@ namespace SummatorApp
 
         private static long SumByPLINQ(int[] mas)
         {
-            long sum = 0;
-            object syncObject = new object();
-
-            Parallel.ForEach(mas, x =>
-            {
-                lock (syncObject)
-                {
-                    sum += x;
-                }
-            });
-
-            return sum;
+            return mas.Select(x => (long)x).AsParallel().Sum();
         }
     }
 
